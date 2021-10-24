@@ -1,0 +1,26 @@
+global proc RandObj(int $amountNum, float $minX, float $maxX, float $minY, float $maxY, float $minZ, float $maxZ)
+{
+
+string $objects[] = `ls -sl`;
+
+
+for ($i=0; $i<size($objects); $i++)    
+{    
+    for ($j=0;$j<$amountNum; $j++) 
+    {  
+    
+      float $x = `rand $minX $maxX`; 
+      float $y = `rand $minY $maxY`;
+      float $z = `rand $minZ $maxZ`;
+      
+    string $objectss[] = `ls -sl`;
+    $DupO = `duplicate $objectss $i`;
+    $DopO = move ($x, $y, $z);
+    
+ 
+      }
+   
+    }
+ }
+
+RandObj(10,1,100,1,100,1,1);

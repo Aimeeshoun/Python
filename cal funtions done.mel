@@ -1,0 +1,520 @@
+
+
+//Addition
+
+
+
+global proc float Add(float $numbers[])
+{
+float $sum = 0;
+
+for ($i=0; $i<size($numbers); $i++)
+{
+$sum += $numbers[$i];
+}
+
+return $sum;
+}
+
+Add({2,3,4,5,6,4});
+
+
+
+
+
+//Subtraction
+
+global float $result;
+
+global proc float Subtract(float $numbers[])
+{
+float $difference = $numbers[0];
+
+for ($i=1; $i<size($numbers); $i++)
+{
+$difference -= $numbers[$i];
+}
+
+return $difference;
+}
+
+Subtract({4,4});
+
+
+//Multiplication
+
+
+
+
+global proc float Multiply(float $numbers[])
+{
+float $multiply = $numbers[0];
+
+for ($i=1; $i<size($numbers); $i++)
+{
+$multiply *= $numbers[$i];
+}
+return $multiply;
+}
+
+Multiply({12,4});
+
+
+//Division
+
+global float $result;
+
+global proc float Divide(float $numbers[])
+{
+float $division = $numbers[0];
+
+for ($i=1; $i<size($numbers); $i++)
+{
+$division /= $numbers[$i];
+}
+return $division;
+}   
+Divide({12,4});
+
+
+//int $test[];
+//$test = {3,4,5,6,7,8,9}
+
+//size($test)
+
+global proc float PowerOf(float $numbers[]) 
+{
+        return `pow $numbers[0] $numbers[1]`;
+        }
+        PowerOf({3,3});
+        
+        
+        
+//Mean
+
+global float $result;
+
+global proc float Mean(float $numbers[])
+{
+float $sum = 0;
+
+for ($i=0; $i<size($numbers); $i++)
+{
+$sum += $numbers[$i];
+}
+
+return $sum /= size($numbers);
+}
+
+
+
+Mean({2,3,4,5,6,4});  
+
+
+//Median 
+global proc float Median(float $numbers[])
+{
+    float $median;
+     int $arraySizess = size($numbers);
+     
+     $numbers = sort($numbers);
+     
+     if ($arraySizess % 2 == 0)
+     {
+         int $maxNum = ($arraySizess / 2);
+         int $minNum = $maxNum - 1;
+         $median = ($numbers[$maxNum] + $numbers[$minNum])/2;
+      
+         
+     }
+     else 
+     {
+         int $index = ($arraySizess -1) / 2;
+         $median = $numbers[$index];
+     }
+     
+ 
+     
+     return $median;
+    
+}
+Median({1,4,7,10,13,4,56,1});
+
+
+
+
+
+//Mode
+
+
+global proc float Mode( float $numbers[])
+{
+float $mode;
+float $values[];
+int $freq[];
+
+
+for($i=0; $i<size($numbers); $i++)
+{
+if  (floatArrayContains($numbers[$i], $values) == 0 )
+{
+$values[size($values)] = $numbers[$i]; 
+$freq[size($freq)] = 1;
+}
+else 
+{
+int $index = floatArrayFind($numbers[$i],0, $values);
+print ($index);
+$freq[$index] = $freq[$index] + 1; 
+}
+}
+print (floatArrayToString($values, ","));
+print ("\nValues:\n");
+print ("\nFrequency:\n");
+print (intArrayToString($freq,","));
+
+int $maxValue = 0;
+for($i=0; $i<size($freq); $i++)
+{
+if($freq[$i] > $maxValue)
+{
+$maxValue = $freq[$i];
+}
+}
+int $modeIndex = intArrayFind($maxValue, 0, $freq);
+$mode = $values[$modeIndex];
+return $mode;
+}
+Mode ({3,5 ,7,3,6,9,3,1}); 
+
+global proc float Calculator(float $numbers[], string $operation)
+{
+  
+  
+ 
+    string $numberSumStrings = " the sum of ";
+   string $numberSubString = " the subraction of ";
+   string $numberMulString = " the multiplication of ";
+   string $numberDivString = " the division of ";
+   string $numberPowString = " the power of ";
+   string $numberMeanString = " the mean of ";
+    string $numberMedString = " the median of ";
+    string $numberModeString = " the mode of ";
+   string $numbersList = `print (floatArrayToString($numbers, ","))`;
+  string $numberIsString = " is";
+ 
+  
+    
+    if ($operation == "add")
+    {
+       $numberSum =  `Add($numbers)`;
+       
+     
+     $numberSumPrint = `print( $numberSumStrings + $numbersList + $numberIsString + $numberSum)`;
+    
+     return $numberSumPrint; 
+      
+      
+      }
+ 
+    
+    else if ($operation == "subtract")
+    {
+       
+        $numberSub = `Subtract($numbers)`;
+       
+       
+       $numberSubPrint = `print( $numberSubString + $numbersList + $numberIsString + $numberSub)`;
+       
+          return $numberSubPrint;
+       
+        }
+    
+    else if ($operation == "multiply")
+    {
+       
+       
+        $numberMul = `Multiply($numbers)`;
+       
+
+  
+   $numberMulPrint =  `print($numberMulString + $numbersList + $numberIsString + $numberMul)`;
+       
+       
+     return $numberMulPrint;
+       
+      
+       
+       
+       
+        }
+    
+    else if($operation == "divide")
+    {
+      
+       $numberDiv = `Divide($numbers)`;
+       
+  
+  
+     $numberDivPrint = `print($numberDivString + $numbersList + $numberIsString + $numberDiv)`;
+       
+     return $numberDivPrint;
+      
+      
+   
+      
+        }
+    
+    else if ($operation == "find power")
+    {
+        $numberPow = `PowerOf($numbers)`;
+       
+ 
+  
+       $numberPowPrint = `print($numberPowString + $numbersList + $numberIsString + $numberPow)`; 
+       
+     return $numberPowPrint;
+       
+      
+       
+       
+      
+        }
+    
+    else if($operation == "find mean")
+    {
+        
+         $numberMean = `Mean($numbers)`;
+       
+ 
+  
+      $numberMeanPrint = `print($numberMeanString + $numbersList + $numberIsString + $numberMean)`;
+       
+     return $numberMeanPrint;
+        
+    
+        
+        
+        
+        
+        
+        }
+    
+    else if ($operation == "find median")
+    {
+       
+        $numberMed = `Median($numbers)`;
+       
+   
+  
+      $numberMedPrint = `print($numberMedString + $numbersList + $numberIsString + $numberMed)`;
+       
+     return $numberMedPrint;
+       
+      
+       
+       
+       
+       
+       
+        }
+        else if ($operation == "find mode")
+    {
+         
+         
+          $numberMode = `Mode($numbers)`;
+       
+    
+  
+       $numberModePrint = `print($numberModeString + $numbersList + $numberIsString + $numberMode)`; 
+       
+     return $numberModePrint;
+         
+        
+
+        }
+    
+}
+
+
+ Calculator({3,4,5},"add");
+ Calculator({12,4},"subtract");
+ Calculator({3,4,5},"multiply");
+ Calculator({4,4},"divide");
+ Calculator({9},"find power");
+ Calculator({3,4,5,6,2,6},"find mean");
+ Calculator({3,4,5,6,7,1},"find median");
+ Calculator({3,4,5,3,3,3},"find mode");
+ 
+
+
+
+
+
+
+global proc float Calculator(float $numbers[], string $operation)
+{
+  
+  
+ 
+    string $numberSumStrings = " the sum of ";
+   string $numberSubString = " the subraction of ";
+   string $numberMulString = " the multiplication of ";
+   string $numberDivString = " the division of ";
+   string $numberPowString = " the power of ";
+   string $numberMeanString = " the mean of ";
+    string $numberMedString = " the median of ";
+    string $numberModeString = " the mode of ";
+   string $numbersList = `print (floatArrayToString($numbers, ","))`;
+  string $numberIsString = " is";
+ 
+  
+    
+    if ($operation == "add")
+    {
+       $numberSum =  `Add($numbers)`;
+       
+     
+     $numberSumPrint = `print( $numberSumStrings + $numbersList + $numberIsString + $numberSum)`;
+    
+     return $numberSumPrint; 
+      
+      
+      }
+ 
+    
+    else if ($operation == "subtract")
+    {
+       
+        $numberSub = `Subtract($numbers)`;
+       
+       
+       $numberSubPrint = `print( $numberSubString + $numbersList + $numberIsString + $numberSub)`;
+       
+          return $numberSubPrint;
+       
+        }
+    
+    else if ($operation == "multiply")
+    {
+       
+       
+        $numberMul = `Multiply($numbers)`;
+       
+
+  
+   $numberMulPrint =  `print($numberMulString + $numbersList + $numberIsString + $numberMul)`;
+       
+       
+     return $numberMulPrint;
+       
+      
+       
+       
+       
+        }
+    
+    else if($operation == "divide")
+    {
+      
+       $numberDiv = `Divide($numbers)`;
+       
+  
+  
+     $numberDivPrint = `print($numberDivString + $numbersList + $numberIsString + $numberDiv)`;
+       
+     return $numberDivPrint;
+      
+      
+   
+      
+        }
+    
+    else if ($operation == "find power")
+    {
+        $numberPow = `PowerOf($numbers)`;
+       
+ 
+  
+       $numberPowPrint = `print($numberPowString + $numbersList + $numberIsString + $numberPow)`; 
+       
+     return $numberPowPrint;
+       
+      
+       
+       
+      
+        }
+    
+    else if($operation == "find mean")
+    {
+        
+         $numberMean = `Mean($numbers)`;
+       
+ 
+  
+      $numberMeanPrint = `print($numberMeanString + $numbersList + $numberIsString + $numberMean)`;
+       
+     return $numberMeanPrint;
+        
+    
+        
+        
+        
+        
+        
+        }
+    
+    else if ($operation == "find median")
+    {
+       
+        $numberMed = `Median($numbers)`;
+       
+   
+  
+      $numberMedPrint = `print($numberMedString + $numbersList + $numberIsString + $numberMed)`;
+       
+     return $numberMedPrint;
+       
+      
+       
+       
+       
+       
+       
+        }
+        else if ($operation == "find mode")
+    {
+         
+         
+          $numberMode = `Mode($numbers)`;
+       
+    
+  
+       $numberModePrint = `print($numberModeString + $numbersList + $numberIsString + $numberMode)`; 
+       
+     return $numberModePrint;
+         
+        
+
+        }
+    
+}
+
+
+ Calculator({3,4,5},"add");
+ Calculator({12,4},"subtract");
+ Calculator({3,4,5},"multiply");
+ Calculator({4,4},"divide");
+ Calculator({9},"find power");
+ Calculator({3,4,5,6,2,6},"find mean");
+ Calculator({3,4,5,6,7,1},"find median");
+ Calculator({3,4,5,3,3,3},"find mode");
+ 
+
+
+
+
+
+
+

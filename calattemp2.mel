@@ -1,0 +1,187 @@
+
+//Addition
+
+global float $result;
+
+global proc float Add(float $numbers[])
+{
+float $sum = 0;
+
+for ($i=0; $i<size($numbers); $i++)
+{
+$sum += $numbers[$i];
+}
+
+return $sum;
+}
+
+Add({2,3,4,5,6,4});
+Add({1,2,4,45,6,5});
+
+int $numbers[];
+$numbers = {1,2,3,4,5,6,7,8,9,10}
+
+
+
+//Subtraction
+
+global float $result;
+
+global proc float Subtract(float $numbers[])
+{
+float $difference = $numbers[0];
+
+for ($i=1; $i<size($numbers); $i++)
+{
+$difference -= $numbers[$i];
+}
+
+return $difference;
+}
+
+Subtract({4,4});
+
+
+//Multiplication
+
+
+
+global float $result;
+
+global proc float Multiply(float $numbers[])
+{
+float $multiply = $numbers[0];
+
+for ($i=1; $i<size($numbers); $i++)
+{
+$multiply *= $numbers[$i];
+}
+return $multiply;
+}
+
+$result = Multiply({4,4});
+
+//Division
+
+global float $result;
+
+global proc float Divide(float $numbers[])
+{
+float $division = $numbers[0];
+
+for ($i=1; $i<size($numbers); $i++)
+{
+$division /= $numbers[$i];
+}
+return $division;
+}   
+Divide({12,4});
+
+
+//int $test[];
+//$test = {3,4,5,6,7,8,9}
+
+//size($test)
+
+global proc float PowerOf(float $numbers[]) 
+{
+        return `pow $numbers[0] $numbers[1]`;
+        }
+        PowerOf({3,3});
+        
+        
+        
+//Mean
+
+global float $result;
+
+global proc float Mean(float $numbers[])
+{
+float $sum = 0;
+
+for ($i=0; $i<size($numbers); $i++)
+{
+$sum += $numbers[$i];
+}
+
+return $sum /= size($numbers);
+}
+
+
+
+Mean({2,3,4,5,6,4});  
+
+
+//Median 
+
+
+global proc float Median(float $numbers[])
+{
+    int $arraySizess = 0;
+    float $sizeCount = 0;
+    float $minNum = 0;
+    float $maxNum = 0;
+    float $median = 0;
+    
+    $numbers = `sort $numbers`;  // puts numbers in order 
+    
+    $arraySizess = `size($numbers)`;   // array size messures how many numbers are in the array
+    
+    $sizeCount = $arraySizess;
+    
+   if ($arraySizess % 2 == 0)
+    {
+       
+        
+        $median = $numbers[$arraySizess / 2];
+        
+    }
+    else
+    {
+       
+       
+         $median = $numbers[$arraySizess / 2];
+          $minNum = $sizeCount / 2;
+        $maxNum = $minNum + 1;
+        
+        $median = $minNum + $maxNum  / 2.0;
+          
+           }
+        
+         return $median;
+   }
+
+Median({2,7,3,4,3,6,3,2,1,2,1,2,2,6,0,5});
+
+
+
+
+//Mode
+
+
+global proc float Mode(float $numbers[])
+{
+   float $valuess[];
+   float $freqs[];
+   float $results[];
+
+    
+    $numbers = `sort $numbers`;  // puts numbers in order 
+
+    for ($i=0; $i<size($numbers); $i++)
+    { 
+        if ( $numbers[$i} == $numbers[size($numbers)-1])
+        { floatArrayInsertAtIndex(0, $valuess, 1 );}
+       if else { Snumber>$numbers[size($numbers)-1])
+        
+          floatArrayInsertAtIndex(0, $freqs, 1 ); }
+         
+        $results= `sort $freqs`;
+        return $results[];
+       
+    }
+ 
+ 
+
+Mode({2,7,3,4,3,6,3,2,1,2,1,2,2,6,0,5});
+
