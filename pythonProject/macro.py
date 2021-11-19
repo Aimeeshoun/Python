@@ -1,106 +1,22 @@
+import maya.cmds as cmdss
+
+sel = (cmdss.ls(sl=True))
+list_rel = (cmdss.listRelatives(sel[0], children=True, shapes=True))
 
 
-
-import maya.cmds as cmds
-
-cmds.polySphere(radius=3,
-                subdivisionsX=20,
-                subdivisionsY=20,
-                axis =[0,0,0],
-                createUVs=2,
-                constructionHistory=1)
-
-cmds.move( 0, 0, 0 )
+def change_color(index):
+    if ctl == 'C':
+        color_shape = (cmdss.listRelatives(sel[0], children=True, shapes=True))
+        color_shape = color_shape[0]
+        n.setAttr(color_shape + '.overrideEnabled', 1)
+        n.setAttr(color_shape + '.overrideRGBColors', 14)
 
 
-cmds.polySphere(radius=2,
-                subdivisionsX=20,
-                subdivisionsY=20,
-                axis =[3,0,0],
-                createUVs=2,
-                constructionHistory=1)
-cmds.move( 0, 3, 0 )
-
-cmds.polySphere(radius=1,
-                subdivisionsX=20,
-                subdivisionsY=20,
-                axis =[0,1,0],
-                createUVs=2,
-                constructionHistory=1)
-cmds.move( 0, 5, 0 )
-
-
-cmds.polySphere(radius=.2,
-                subdivisionsX=20,
-                subdivisionsY=20,
-                axis =[0,1,0],
-                createUVs=2,
-                constructionHistory=1)
-cmds.move( -.339, 5.59, 0.7 )
-
-
-
-cmds.polySphere(radius=.2,
-                subdivisionsX=20,
-                subdivisionsY=20,
-                axis =[0,1,0],
-                createUVs=2,
-                constructionHistory=1)
-cmds.move( .498, 5.59, .64 )
-
-cmds.polyCube(
-                subdivisionsX=4,
-                subdivisionsY=4,
-                axis =[0,1,0],
-                h = 1,
-                w = 1,
-                d = 1 ,
-                createUVs=2,
-                constructionHistory=1)
-
-cmds.move( 0, 6.7, 0 )
-
-cmds.polyCube(
-                subdivisionsX=4,
-                subdivisionsY=4,
-                axis =[0,1,0],
-                h = .5,
-                w = 2,
-                d = 2 ,
-                createUVs=2,
-                constructionHistory=1)
-
-cmds.move( 0, 6, 0 )
-
-cmds.polySphere(radius=.1,
-                subdivisionsX=20,
-                subdivisionsY=20,
-                axis =[3,0,0],
-                createUVs=2,
-                constructionHistory=1)
-cmds.move( 0, 5.21, 1 )
-
-cmds.polyCube(
-                subdivisionsX=4,
-                subdivisionsY=4,
-                axis =[0,1,0],
-                h = .5,
-                w = 5,
-                d = .5 ,
-                createUVs=2,
-                constructionHistory=1)
-
-cmds.move( -2.58, 3.7, 0 )
-cmds.move( -2.58, 3.7, 0 )
-
-cmds.polyCube(
-                subdivisionsX=4,
-                subdivisionsY=4,
-                axis =[0,1,0],
-                h = .5,
-                w = 5,
-                d = .5 ,
-                createUVs=2,
-                constructionHistory=1)
-
-cmds.move( 2.49, 3.79, 0 )
+def ctrl_center(input, color_index2):
+    for i in range(len(sel)):
+        sel[i] = obj
+        center_object = (cmdss.xform(obj[0], q=True, rotatePivot=True, worldSpace=True))
+        rotation_object = (cmdss.xform(obj[0], q=True, rotation=True, worldSpace=True))
+        circle_obj = (cmdss.circle(r=5))
+        edit_ctrl = (cmdss.xform(cirle_obj[0], e=True, rotation=rotation_object, rotatePivot=center_object)
+                     change_color(color_index)
