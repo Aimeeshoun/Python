@@ -287,4 +287,71 @@ cmds.button( label='wire frame/green', command='ChangeColor(14)')
 cmds.setParent( '..' )
 cmds.showWindow( window )    
 
-        
+import maya.cmds as cmds
+
+
+class ToolUI():
+    def __init__(self):
+        self.m_window = 'changeColorUIWin'
+        pass
+
+
+    def create(self):
+        self.delete()
+
+        self.m_window = cmds.window(self.m_window,
+                                title="Button Window",
+                                widthHeight=(200, 55))
+        m_columnLayout(parent=self.m_window,
+                   adjustableColumn=True)
+        cmds.button(parent.m_column, label='Ball', command='cmds.polySphere()')
+        cmds.button(parent.m_column, label='redcolor', command='ChangeColor(13)')
+        cmds.button(parent.m_column, label='bluecolor', command='ChangeColor(6)')
+        cmds.button(parent.m_column, label='greencolor', command='ChangeColor(14)')
+        cmds.button(parent.m_column, label='remaner', command='renamer()')
+        cmds.button(parent.m_column, label='controls', command='ctrl_creator()')
+        cmds.button(parent.m_column, label='default control', command='CreateControl()')
+
+        cmds.showWindow(self.m_window)
+
+
+    def delete(self):
+        if cmds.window(self.m_window, exists=True):
+            cmds.deleteUI(self.m_window)       
+            
+            
+            
+
+
+
+
+import maya.cmds as cmds
+
+
+class ToolUI():
+    def __init__(self):
+        self.m_window = 'changeColorUIWin'
+        pass
+
+    def create(self):
+        self.delete()
+
+        self.m_window = cmds.window(self.m_window,title="Button Window",widthHeight=(200, 55))
+        m_column = cmds.columnLayout(parent=self.m_window,adjustableColumn=True)
+        cmds.button(parent.m_column, label='Ball', command='cmds.polySphere()')
+        cmds.button(parent.m_column, label='redcolor', command=lambda x: ChangeColor(13))
+        cmds.button(parent.m_column, label='bluecolor', command=lambda x: ChangeColor(6))
+        cmds.button(parent.m_column, label='greencolor', command=lambda x: ChangeColor(14))
+        cmds.button(parent.m_column, label='rename ctrl', command='renamer()')
+        cmds.button(parent.m_column, label='controls', command='ctrl_creator()')
+        cmds.button(parent.m_column, label='default control', command='CreateControl()')
+        cmds.button(parent.m_column,)
+
+        cmds.showWindow(self.m_window)
+
+    def delete(self):
+        if cmds.window(self.m_window, exists=True):
+            cmds.deleteUI(self.m_window)
+
+            
+            
