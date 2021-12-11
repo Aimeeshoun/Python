@@ -1,351 +1,56 @@
-
-import maya.cmds as cmds
-window = cmds.window(title="Long Name", iconName='Short Name', widthHeight=(200,55 ))
-layout1 = cmds.rowColumnLayout(numberOfColumns=3, parent=window)
-cmds.button(parent=layout1, label=' ball', command='cmds.polySphere()')
-cmds.button(parent=layout1, label='wire frame/red', command='ChangeColor(13)')
-cmds.button(parent=layout1, label='wire frame/pink', command='ChangeColor(9)')
-cmds.button(parent=layout1, label='wire frame/yellow', command='ChangeColor(17)')
-cmds.button(parent=layout1, label='wire frame/brown', command='ChangeColor(10)')
-cmds.button(parent=layout1, label='wire frame/black', command='ChangeColor(1)')
-cmds.button(parent=layout1, label='wire frame/blue', command='ChangeColor(6)')
-cmds.button(parent=layout1, label='wire frame/green', command='ChangeColor(14)')
-cmds.button(parent=layout1, label='wire frame/purple', command='ChangeColor(30)')
-cmds.button(parent=layout1, label='default control', command='CreateControl()')
-cmds.button(parent=layout1, label='controls', command='ctrl_creator()')
-cmds.button(parent=layout1, label='rename ctrl', command='renamer()')
-
-
-cmds.showWindow(window)
-
-
-
-
-import maya.cmds as cmds
-
-def ChangeColor(color):
-    sels=cmds.ls(sl=True)
-    for sel in sels:
-        shapes = cmds.listRelatives(sel, children=True, shapes=True)
-        for shape in shapes:
-            cmds.setAttr( "%s.overrideEnabled" % (shape),True)
-            cmds.setAttr( "%s.overrideColor" % (shape),color)
-        return
-
-ChangeColor()
-
-
-import maya.cmds as cmds
-def ctrl_creator():
-    sel = (cmds.ls(sl=True))
-    grpstring = "grp"
-    ctrlstring = "ctrl"
-    geostring = "geo"
-    jntstring = "jnt"
-    nurvs = [];
-    if len(sel) is 0:
-        newCircle = cmds.circle(r=1.5, n='Joint_ctrl')
-        create_group = (cmds.group(n='group_ctrl'))
-        nurvs.append("newCircle")
-    for i in range(len(sel)):
-        obj_translate = cmds.xform(sel[i], query=True, rp=True, worldSpace=True)
-        obj_rotate = cmds.xform(sel[i], query=True, rotation=True, worldSpace=True)
-        nurvs.append("newCircle")
-        the_string = sel[i].partition("_")
-        stg_partition = the_string[2]
-        finished_string = the_string[0] + "_ctrl"
-        new_name = cmds.rename(finished_string)
-        color_option = ('input2')
-        newCircle2 = cmds.circle(r=1.5, n=the_string[0] + '_joint_ctrl')
-        create_group = (cmds.group(n=the_string[0] + '_group_ctrl'))
-        cmds.xform(create_group, translation=obj_translate, worldSpace=True)
-        cmds.xform(create_group, rotation=obj_rotate, worldSpace=True)
-        if grpstring in stg_partition:
-            replaced_text = cmds.rename(finished_string)
-        elif ctrlstring in stg_partition:
-            replaced_text = cmds.rename(finished_string)
-        elif geostring in stg_partition:
-            replaced_text = cmds.rename(finished_string)
-        elif jntstring in stg_partition:
-            replaced_text = cmds.rename(finished_string)
-        elif object_selection is '':
-            replaced_text = cmds.rename(finished_string)
-    sel.append(object_sec)
-
-
-ctrl_creator()
-
-
-def CreateControl():
-    newCircle = cmds.circle(r=1.5, n='Joint_ctrl')
-    create_group = (cmds.group(n='group_ctrl'))
-    nurvs.append("newCircle")  
-CreateControl()    
-    
-    
-    
-    
-def grouper():
-    for i in range(len(sel)):
-        obj_translate = cmds.xform(sel[i], query=True, rp=True, worldSpace=True)
-        obj_rotate = cmds.xform(sel[i], query=True, rotation=True, worldSpace=True)
-        nurvs.append("newCircle")
-        the_string = sel[i].partition("_")
-        stg_partition = the_string[2]
-        finished_string = the_string[0] + "_ctrl"
-        new_name = cmds.rename(finished_string)
-        color_option = ('input2')
-        newCircle2 = cmds.circle(r=1.5, n=the_string[0] + '_joint_ctrl')
-        create_group = (cmds.group(n=the_string[0] + '_group_ctrl'))
-        cmds.xform(create_group, translation=obj_translate, worldSpace=True)
-        cmds.xform(create_group, rotation=obj_rotate, worldSpace=True)
-        if grpstring in stg_partition:
-            replaced_text = cmds.rename(finished_string)
-        elif ctrlstring in stg_partition:
-            replaced_text = cmds.rename(finished_string)
-        elif geostring in stg_partition:
-            replaced_text = cmds.rename(finished_string)
-        elif jntstring in stg_partition:
-            replaced_text = cmds.rename(finished_string)
-        elif object_selection is '':
-            replaced_text = cmds.rename(finished_string)
-        sel.append(object_sec)
-        
-        
-        
-        
-        
-        
-        
-import maya.cmds as cmds
-def ctrl_creator():
-    sel = (cmds.ls(sl=True))
-    grpstring = "grp"
-    ctrlstring = "ctrl"
-    geostring = "geo"
-    jntstring = "jnt"
-    nurvs = [];
-    for i in range(len(sel)):
-        obj_translate = cmds.xform(sel[i], query=True, rp=True, worldSpace=True)
-        obj_rotate = cmds.xform(sel[i], query=True, rotation=True, worldSpace=True)
-        nurvs.append("newCircle")
-        the_string = sel[i].partition("_")
-        stg_partition = the_string[2]
-        finished_string = the_string[0] + "_ctrl"
-        new_name = cmds.rename(finished_string)
-        newCircle2 = cmds.circle(r=1.5, n=the_string[0] + '_joint_ctrl')
-        create_group = (cmds.group(n=the_string[0] + '_group_ctrl'))
-        cmds.xform(create_group, translation=obj_translate, worldSpace=True)
-        cmds.xform(create_group, rotation=obj_rotate, worldSpace=True)
-        if grpstring in stg_partition:
-            replaced_text = cmds.rename(finished_string)
-        elif ctrlstring in stg_partition:
-            replaced_text = cmds.rename(finished_string)
-        elif geostring in stg_partition:
-            replaced_text = cmds.rename(finished_string)
-        elif jntstring in stg_partition:
-            replaced_text = cmds.rename(finished_string)
-        elif object_selection is '':
-            replaced_text = cmds.rename(finished_string)
-    sel.append(object_sec)
-ctrl_creator()
-
-
-
-
-import maya.cmds as cmds
-def renamer():
-    sel = (cmds.ls(sl=True))
-    grpstring = "grp"
-    ctrlstring = "ctrl"
-    geostring = "geo"
-    jntstring = "jnt"
-    nurvs = [];
-    for i in range(len(sel)):
-        obj_translate = cmds.xform(sel[i], query=True, rp=True, worldSpace=True)
-        obj_rotate = cmds.xform(sel[i], query=True, rotation=True, worldSpace=True)
-        nurvs.append("newCircle")
-        the_string = sel[i].partition("_")
-        stg_partition = the_string[2]
-        finished_string = the_string[0] + "_ctrl"
-        new_name = cmds.rename(finished_string)
-renamer()
-
-import maya.cmds as cmds
-def changeControlBlue()
-    sel = (cmds.ls(sl=True))
-
-    cmds.setAttr(new_shape + ".overrideEnabled", 1)
-    cmds.setAttr(new_shape + ".overrideColor", 2)
-    
-    
-    
-    
-    
-    
-    
-import maya.cmds as cmds
-
-def re_color(input):
-    sels = (cmds.ls(sl=True))
-    for sel2 in sels:
-        new_shape = (cmds.listRelatives(sel2, children=True, shapes=True)[0])
-        print (new_shape)
-        cmds.setAttr(new_shape + ".overrideEnabled", 1)
-        cmds.setAttr(new_shape + ".overrideColor", 2)
-        
-        
-        
-        
-        
-
-from maya import cmds
-
-
-window = cmds.window( title="Long Name", iconName='Short Name', widthHeight=(200, 55) )
-cmds.columnLayout( adjustableColumn=True )
-cmds.button( label='Do Nothing' )
-cmds.button( label='Close', command=('cmds.deleteUI(\"' + window + '\", window=True)') )
-cmds.setParent( '..' )
-cmds.showWindow( window )        
-        
-        
-        
-        
-
-from maya import cmds
-
-
-window = cmds.window( title="default control", iconName='ctrl', widthHeight=(200, 55) )
-cmds.columnLayout( adjustableColumn=True )
-cmds.button( label='default control', command='CreateControl()' )
-cmds.setParent( '..' )
-cmds.showWindow( window )  
-
-
-
-
-
-
-from maya import cmds
-
-
-window = cmds.window( title="controls", iconName='ctrls', widthHeight=(200, 55) )
-cmds.columnLayout( adjustableColumn=True )
-cmds.button( label='controls', command='ctrl_creator()' )
-cmds.setParent( '..' )
-cmds.showWindow( window )  
-
-
-
-
-
-
-from maya import cmds
-
-
-window = cmds.window( title="renamer", iconName='name', widthHeight=(200, 55) )
-cmds.columnLayout( adjustableColumn=True )
-cmds.button( label='rename ctrl', command='renamer()' )
-cmds.setParent( '..' )
-cmds.showWindow( window )    
-
-cmds.button(parent=layout1, label='rename ctrl', command='renamer()')     
-
-
-
-
-from maya import cmds
-
-
-window = cmds.window( title="wire frame/red", iconName='red', widthHeight=(200, 55) )
-cmds.columnLayout( adjustableColumn=True )
-cmds.button( label='wire frame/red', command='ChangeColor(13)')
-cmds.setParent( '..' )
-cmds.showWindow( window )    
-
-cmds.button(parent=layout1, label='rename ctrl', command='renamer()')  
-
-
-from maya import cmds
-
-
-window = cmds.window( title="wire frame/blue", iconName='blue', widthHeight=(200, 55) )
-cmds.columnLayout( adjustableColumn=True )
-cmds.button( label='wire frame/blue', command='ChangeColor(6)')
-cmds.setParent( '..' )
-cmds.showWindow( window )    
-
-
-
-from maya import cmds
-
-
-window = cmds.window( title="wire frame/green", iconName='green', widthHeight=(200, 55) )
-cmds.columnLayout( adjustableColumn=True )
-cmds.button( label='wire frame/green', command='ChangeColor(14)')
-cmds.setParent( '..' )
-cmds.showWindow( window )    
-
 import maya.cmds as cmds
 
 
 class ToolUI():
     def __init__(self):
         self.m_window = 'changeColorUIWin'
-        pass
-
-
-    def create(self):
-        self.delete()
-
-        self.m_window = cmds.window(self.m_window,
-                                title="Button Window",
-                                widthHeight=(200, 55))
-        m_columnLayout(parent=self.m_window,
-                   adjustableColumn=True)
-        cmds.button(parent.m_column, label='Ball', command='cmds.polySphere()')
-        cmds.button(parent.m_column, label='redcolor', command='ChangeColor(13)')
-        cmds.button(parent.m_column, label='bluecolor', command='ChangeColor(6)')
-        cmds.button(parent.m_column, label='greencolor', command='ChangeColor(14)')
-        cmds.button(parent.m_column, label='remaner', command='renamer()')
-        cmds.button(parent.m_column, label='controls', command='ctrl_creator()')
-        cmds.button(parent.m_column, label='default control', command='CreateControl()')
-
-        cmds.showWindow(self.m_window)
-
-
-    def delete(self):
-        if cmds.window(self.m_window, exists=True):
-            cmds.deleteUI(self.m_window)       
-            
-            
-            
-
-
-
-
-import maya.cmds as cmds
-
-
-class ToolUI():
-    def __init__(self):
-        self.m_window = 'changeColorUIWin'
-        pass
+        self.name_txtfield = ''
 
     def create(self):
         self.delete()
-
-        self.m_window = cmds.window(self.m_window,title="Button Window",widthHeight=(200, 55))
-        m_column = cmds.columnLayout(parent=self.m_window,adjustableColumn=True)
-        cmds.button(parent.m_column, label='Ball', command='cmds.polySphere()')
-        cmds.button(parent.m_column, label='redcolor', command=lambda x: ChangeColor(13))
-        cmds.button(parent.m_column, label='bluecolor', command=lambda x: ChangeColor(6))
-        cmds.button(parent.m_column, label='greencolor', command=lambda x: ChangeColor(14))
-        cmds.button(parent.m_column, label='rename ctrl', command='renamer()')
-        cmds.button(parent.m_column, label='controls', command='ctrl_creator()')
-        cmds.button(parent.m_column, label='default control', command='CreateControl()')
-        cmds.button(parent.m_column,)
+        import tools
+        importlib.reload(tools)
+        self.m_window = cmds.window(self.m_window, title="Button Window", widthHeight=(200, 55))
+        m_column = cmds.columnLayout(parent=self.m_window, adjustableColumn=True)
+        cmds.button(parent=m_column, label='Create Ball', command='cmds.polySphere()')
+        cmds.button(parent=m_column, label='Grey',backgroundColor=(.400, .4000, .4000), command=lambda x: tools.ChangeColor(0))#
+        cmds.button(parent=m_column, label='Black',backgroundColor=(.00, .000, .000), command=lambda x: tools.ChangeColor(1))#
+        cmds.button(parent=m_column, label='Dark Grey',backgroundColor=(.20, .200, .200), command=lambda x: tools.ChangeColor(2))#
+        cmds.button(parent=m_column, label='Med Grey',backgroundColor=(.30, .300, .300), command=lambda x: tools.ChangeColor(3))#
+        cmds.button(parent=m_column, label='Red',backgroundColor=(.83233, .242750, .288730), command=lambda x: tools.ChangeColor(4))#
+        cmds.button(parent=m_column, label='Dark Blue',backgroundColor=(.14454300, .12345000, .76576000), command=lambda x: tools.ChangeColor(5))#
+        cmds.button(parent=m_column, label='Light Blue',backgroundColor=(.343500, .542000, .7657000), command=lambda x: tools.ChangeColor(6))
+        cmds.button(parent=m_column, label='Green',backgroundColor=(.16534500, .3766000, .2345000), command=lambda x: tools.ChangeColor(7))#
+        cmds.button(parent=m_column, label='Dark Purple',backgroundColor=(.64454300, .32345000, .96576000), command=lambda x: tools.ChangeColor(8))
+        cmds.button(parent=m_column, label='Light Purple',backgroundColor=(.74454300, .32345000, .76576000), command=lambda x: tools.ChangeColor(9))#
+        cmds.button(parent=m_column, label='Brown',backgroundColor=(.64454300, .42345000, .36576000), command=lambda x: tools.ChangeColor(10))
+        cmds.button(parent=m_column, label='Dark Brown',backgroundColor=(.74454300, .42345000, .26576000), command=lambda x: tools.ChangeColor(11))
+        cmds.button(parent=m_column, label='Red Brown',backgroundColor=(.76534500, .3766000, .2345000), command=lambda x: tools.ChangeColor(12))#
+        cmds.button(parent=m_column, label='Orange Red',backgroundColor=(.73233, .342750, .288730), command=lambda x: tools.ChangeColor(13))#
+        cmds.button(parent=m_column, label='Light Green',backgroundColor=(.76534500, .8766000, .6345000), command=lambda x: tools.ChangeColor(14))#
+        cmds.button(parent=m_column, label='Light Blue Too',backgroundColor=(.343500, .542000, .7657000), command=lambda x: tools.ChangeColor(15))#
+        cmds.button(parent=m_column, label='White',backgroundColor=(1.00, 1.000, 1.000), command=lambda x: tools.ChangeColor(16))#
+        cmds.button(parent=m_column, label='Yellow',backgroundColor=(.76534500, .8766000, .2345000), command=lambda x: tools.ChangeColor(17))#
+        cmds.button(parent=m_column, label='Pastel Blue',backgroundColor=(.243500, .842000, .9657000), command=lambda x: tools.ChangeColor(18))
+        cmds.button(parent=m_column, label='Pastel Green',backgroundColor=(.76534500, .8766000, .6345000), command=lambda x: tools.ChangeColor(19))#
+        cmds.button(parent=m_column, label='Pastel Pink',backgroundColor=(.8783, .698750, .788730), command=lambda x: tools.ChangeColor(20))#
+        cmds.button(parent=m_column, label='Pastel Orange',backgroundColor=(.734500, .5754000, .5654000), command=lambda x: tools.ChangeColor(21))#
+        cmds.button(parent=m_column, label='Pastel Yellow',backgroundColor=(.76534500, .8766000, .2345000), command=lambda x: tools.ChangeColor(22))#
+        cmds.button(parent=m_column, label='Green Kelly',backgroundColor=(.76534500, .8766000, .6345000), command=lambda x: tools.ChangeColor(23))#
+        cmds.button(parent=m_column, label='Green Brown',backgroundColor=(.26534500, .3766000, .2345000), command=lambda x: tools.ChangeColor(24))
+        cmds.button(parent=m_column, label='Green Puke',backgroundColor=(.16534500, .4766000, .2345000), command=lambda x: tools.ChangeColor(25))#
+        cmds.button(parent=m_column, label='Green Lime',backgroundColor=(.16534500, .4766000, .1345000), command=lambda x: tools.ChangeColor(26))#
+        cmds.button(parent=m_column, label='Green Swamp',backgroundColor=(.76534500, .8766000, .6345000), command=lambda x: tools.ChangeColor(27))#
+        cmds.button(parent=m_column, label='Grey Blue',backgroundColor=(.334500, .4754000, .5654000), command=lambda x: tools.ChangeColor(28))#
+        cmds.button(parent=m_column, label='Elephant Blue',backgroundColor=(.343500, .542000, .7657000), command=lambda x: tools.ChangeColor(29))#
+        cmds.button(parent=m_column, label='Purple',backgroundColor=(.343500, .242000, .7657000), command=lambda x: tools.ChangeColor(30))#
+        cmds.button(parent=m_column, label='Magenta',backgroundColor=(.74454300, .32345000, .76576000), command=lambda x: tools.ChangeColor(31))#
+        cmds.button(parent=m_column, label='Control Builder', command=lambda x: tools.ctrl_creator())
+        cmds.button(parent=m_column, label='Default Control', command=lambda x: tools.CreateControl())
+        cmds.button(parent=m_column, label='Rename', command=lambda x: tools.renamer())
+        self.name_txtfield = (cmds.textField(parent=m_column))
+        cmds.button(parent=m_column, label='Enter',
+                    command=lambda x: self.renamer_cmd())
 
         cmds.showWindow(self.m_window)
 
@@ -353,5 +58,16 @@ class ToolUI():
         if cmds.window(self.m_window, exists=True):
             cmds.deleteUI(self.m_window)
 
-            
-            
+    def renamer_cmd(self):
+        import tools
+        importlib.reload(tools)
+        tools.renamer(cmds.textField(self.name_txtfield, q=True, text=True))
+        return
+
+
+myUI = ToolUI()
+myUI.create()
+
+# select all the objects at once for the controls
+#put the object in the text feild that you want the name changed
+
