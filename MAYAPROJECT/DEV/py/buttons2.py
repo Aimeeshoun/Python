@@ -1,7 +1,6 @@
 
-
 import maya.cmds as cmds
-
+import importlib
 
 class ToolUI():
     def __init__(self):
@@ -10,8 +9,6 @@ class ToolUI():
 
     def create(self):
         self.delete()
-        import tools
-
         self.m_window = cmds.window(self.m_window, title="Button Window", widthHeight=(200, 55))
         m_column = cmds.columnLayout(parent=self.m_window, adjustableColumn=True)
         cmds.button(parent=m_column, label='Create Ball', command='cmds.polySphere()')
@@ -93,11 +90,10 @@ class ToolUI():
 
     def renamer_cmd(self):
         import tools
+        importlib.reload(tools)
         tools.name_sequence(cmds.textField(self.name_txtfield, q=True, text=True))
         return
 
 
 myUI = ToolUI()
 myUI.create()
-
-
